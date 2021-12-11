@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthValue : MonoBehaviour
+public class Health : MonoBehaviour
 {
     [SerializeField] private Button _hit;
     [SerializeField] private Button _healing;
@@ -13,7 +13,7 @@ public class HealthValue : MonoBehaviour
     private float _maxHealth = 100f;
     private float _minHealth = 0f;
     
-    public float PlayerHealthValue => _healthValue;
+    public float HealthValue => _healthValue;
 
     private void Start()
     {
