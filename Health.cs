@@ -3,37 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Health : MonoBehaviour
+public class HealthValue : MonoBehaviour
 {
     [SerializeField] private Button _hit;
     [SerializeField] private Button _healing;
 
+    private PlayerHealthBar _healthBar;
+
     private float _healthValue;
     private float _changeValue;
+    private float _changedHealthValue;
     private float _maxHealth = 100f;
     private float _minHealth = 0f;
-    
-    public float HealthValue => _healthValue;
+
+    public float PlayerHealthValue => _healthValue;
+    public float ChangedHealthValue => _changedHealthValue;
 
     private void Start()
     {
+        _changedHealthValue = _healthValue + _changeValue;
+
         _changeValue = 10;
         _healthValue = 100f;
     }
 
-    private void Hit()
+    public void Hit()
     {
-        if(_healthValue > _minHealth)
-        _healthValue -= _changeValue;
-
-        _healthValue = _minHealth;
+        PlayerHealth(-_changedHealthValue);
     }
 
-    private void Healing()
+    public void Cure()
     {
-        if(_healthValue < _maxHealth)
-        _healthValue += _changeValue;
+        PlayerHealth(_changedHealthValue);
+    }
 
-        _healthValue = _maxHealth;
+    private void PlayerHealth(float changedHealthValue)
+    {
+        _healthValue = Mathf.Clamp(changedHealthValue, _minHealth, _maxHealth);
     }
 }
