@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
     [SerializeField] private Button _hit;
     [SerializeField] private Button _healing;
 
-    private PlayerHealthBar _healthBar;
+    private HealthBar _healthBar;
 
     private float _healthValue;
     private float _changeValue;
