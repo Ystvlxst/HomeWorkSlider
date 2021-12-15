@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthValue : MonoBehaviour
+public class Health : MonoBehaviour
 {
     [SerializeField] private Button _hit;
     [SerializeField] private Button _healing;
@@ -29,15 +29,15 @@ public class HealthValue : MonoBehaviour
 
     public void Hit()
     {
-        PlayerHealth(-_changedHealthValue);
+        ChangeHealth(-_changedHealthValue);
     }
 
     public void Cure()
     {
-        PlayerHealth(_changedHealthValue);
+        ChangeHealth(_changedHealthValue);
     }
 
-    private void PlayerHealth(float changedHealthValue)
+    private void  ChangeHealth(float changedHealthValue)
     {
         _healthValue = Mathf.Clamp(changedHealthValue, _minHealth, _maxHealth);
     }
