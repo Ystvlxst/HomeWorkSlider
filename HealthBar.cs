@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerHealthBar : MonoBehaviour
+public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
-    private HealthValue _healthValue;
+    private Health _healthValue;
 
     private void Start()
     {
