@@ -12,7 +12,7 @@ public class Health : MonoBehaviour
     private float _maxHealth = 100f;
     private float _minHealth = 0f;
 
-    public event UnityAction OnButtonClicked;
+    public event UnityAction Changed;
 
     private void Start()
     {
@@ -29,9 +29,9 @@ public class Health : MonoBehaviour
         ChangeHealth(_changedValue);
     }
 
-    public void ChangeHealth(float changedValue)
+    private void ChangeHealth(float changedValue)
     {
-        OnButtonClicked?.invoke();
+        Changed?.invoke();
         float changeValue = 10f;
         changedValue = _value + changeValue;
         _value = Mathf.Clamp(changedValue, _minHealth, _maxHealth);
