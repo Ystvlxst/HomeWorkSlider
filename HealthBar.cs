@@ -7,15 +7,16 @@ using UnityEngine.Events;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
+    private Health _health;
 
     private void OnEnable()
     {
-        Health.OnButtonClicked += OnButtonClicked;
+        _health.Changed += SliderValueChange;
     }
 
-    private void OnDisable() 
+    private void OnDisable()
     {
-        Health.OnButtonClicked -= OnButtonClicked;
+        _health.Changed -= SliderValueChange;
     }
 
     public IEnumerator ChangeSliderValue(float targetValue)
@@ -29,7 +30,7 @@ public class HealthBar : MonoBehaviour
         }
     }
 
-    private void OnButtonClicked()
+    private void SliderValueChange()
     {
         Startcorutine(ChangeSliderValue());
     }
