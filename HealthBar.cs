@@ -2,29 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
-    private Health _healthValue;
 
-    private void Start()
+    private void OnEnable()
     {
-        _slider.value = _healthValue.PlayerHealthValue;
+        Health.OnButtonClicked += OnButtonClicked;
     }
 
-    private void Hit()
+    private void OnDisable() 
     {
-        _healthValue.Hit();
-        StopCoroutine(ChangeSliderValue(_healthValue.ChangedHealthValue));
-        StartCoroutine(ChangeSliderValue(-_healthValue.ChangedHealthValue));
-    }
-
-    private void Cure()
-    {
-        _healthValue.Cure();
-        StopCoroutine(ChangeSliderValue(-_healthValue.ChangedHealthValue));
-        StartCoroutine(ChangeSliderValue(_healthValue.ChangedHealthValue));
+        Health.OnButtonClicked -= OnButtonClicked;
     }
 
     public IEnumerator ChangeSliderValue(float targetValue)
@@ -36,5 +27,10 @@ public class HealthBar : MonoBehaviour
             _slider.value = Mathf.MoveTowards(_slider.value, targetValue, maxDelta);
             yield return null;
         }
+    }
+
+    private void OnButtonClicked()
+    {
+        Startcorutine(ChangeSliderValue());
     }
 }
